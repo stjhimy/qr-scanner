@@ -537,7 +537,7 @@ class QrScanner {
                     };
                     qrEngineWorker.addEventListener('message', onMessage);
                     qrEngineWorker.addEventListener('error', onError);
-                    timeout = setTimeout(() => onError('timeout'), 10000);
+                    timeout = setTimeout(() => onError('timeout'), 20000);
                     const imageData = canvasContext.getImageData(0, 0, canvas!.width, canvas!.height);
                     expectedResponseId = QrScanner._postWorkerMessageSync(
                         qrEngineWorker,
@@ -550,7 +550,7 @@ class QrScanner {
                 detailedScanResult = await Promise.race([
                     new Promise<QrScanner.ScanResult>((resolve, reject) => window.setTimeout(
                         () => reject('Scanner error: timeout'),
-                        10000,
+                        20000,
                     )),
                     (async (): Promise<QrScanner.ScanResult> => {
                         try {
